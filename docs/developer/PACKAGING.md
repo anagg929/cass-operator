@@ -88,3 +88,8 @@ operator-sdk scorecard
 * `runAsUser` set to `999` in the deployment - OpenShift prefers to set a randomly assigned user at container start time. If this field is not left empty the user field must be set extremely high. 999 is too low.
 * Prerequisite custom resources have not been included in the appropriate section of the operator metadata testing page
 * The package has not been marked as published in the Red Hat repo.
+
+## Packaging for Red Hat
+
+## Packaging for OperatorHub
+

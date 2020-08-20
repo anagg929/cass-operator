@@ -7,7 +7,7 @@ metadata:
     capabilities: Auto Pilot
     categories: Database,Big Data,OpenShift Optional
     certified: "true"
-    containerImage: registry.connect.redhat.com/datastax/cass-operator:1.2.0
+    containerImage: registry.connect.redhat.com/datastax/cass-operator:1.3.0-ubi
     createdAt: "2020-05-29"
     description: |
       Simple provisioning, turn-key operations, and automated remediation of Apache Cassandra clusters
@@ -24,295 +24,294 @@ spec:
         CassandraDatacenter is the Schema for the cassandradatacenters API
       kind: CassandraDatacenter
       version: v1beta1
-resources: 
-          - kind: Deployment
-            version: v1
-            name: ""
-          - kind: Service
-            version: v1
-            name: ""
-          - kind: Secret
-            version: v1
-            name: ""
-          - kind: ConfigMap
-            version: v1
-            name: ""
-          - kind: CassandraDatacenter
-            version: v1beta1
-            name: ""
-          - kind: Pod
-            version: v1
-            name: ""
-          - kind: PodDisruptionBudget
-            version: v1beta1
-            name: ""
-          - kind: StatefulSet
-            version: v1
-            name: ""
-          - kind: Event
-            version: v1
-            name: ""
-          - kind: ReplicaSet
-            version: v1
-            name: ""
-          - kind: ServiceMonitor
-            version: v1
-            name: ""
-        specDescriptors:
-          - path: serverType
-            description: Server Type
-            displayName: Server Type
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:select:cassandra
-              - urn:alm:descriptor:com.tectonic.ui:select:dse
-          
-          - path: serverVersion
-            description: Server Version
-            displayName: Server Version
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:text
-          
-          - path: clusterName
-            description: |
-              Name of the Cassandra cluster. Multiple CassandraDatacenter
-              objects in the same namespace and Cluster Name
-              will automatically be wired together as a single cluster.
-            displayName: Cluster Name
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-          
-          - path: size
-            description: Size
-            displayName: Size
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:podCount
-          
-          - path: racks
-            description: |
-              Collection of logical rack identifiers, these may be named 
-              and specify a zone to limit pod deployment.
-            displayName: Racks
+      resources: 
+        - kind: Deployment
+          version: v1
+          name: ""
+        - kind: Service
+          version: v1
+          name: ""
+        - kind: Secret
+          version: v1
+          name: ""
+        - kind: ConfigMap
+          version: v1
+          name: ""
+        - kind: CassandraDatacenter
+          version: v1beta1
+          name: ""
+        - kind: Pod
+          version: v1
+          name: ""
+        - kind: PodDisruptionBudget
+          version: v1beta1
+          name: ""
+        - kind: StatefulSet
+          version: v1
+          name: ""
+        - kind: Event
+          version: v1
+          name: ""
+        - kind: ReplicaSet
+          version: v1
+          name: ""
+        - kind: ServiceMonitor
+          version: v1
+          name: ""
+      specDescriptors:
+        - path: serverType
+          description: Server Type
+          displayName: Server Type
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:select:cassandra
+            - urn:alm:descriptor:com.tectonic.ui:select:dse
+        
+        - path: serverVersion
+          description: Server Version
+          displayName: Server Version
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:text
+        
+        - path: clusterName
+          description: |
+            Name of the Cassandra cluster. Multiple CassandraDatacenter
+            objects in the same namespace and Cluster Name
+            will automatically be wired together as a single cluster.
+          displayName: Cluster Name
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+        
+        - path: size
+          description: Size
+          displayName: Size
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:podCount
+        
+        - path: racks
+          description: |
+            Collection of logical rack identifiers, these may be named 
+            and specify a zone to limit pod deployment.
+          displayName: Racks
 
-          - path: racks[0].name
-            description: |
-              User friendly name of the rack. Limit characters to 
-              alphanumeric values, dashes, and underscores.
-            displayName: Name
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:rack
-          
-          - path: racks[0].zone
-            description: |
-              failure-domain.beta.kubernetes.io/zone node label value
-              where pods related to this rack will be restricted. Note
-              the value may be in the topology.kubernetes.io/zone label
-              as well.
-            displayName: Zone
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:rack
-          
-          - path: resources
-            description: |
-              Resource requests and limits for each Cassandra pod in the 
-              cluster. Note: Only specify CPU and memory limits here.
-            displayName: Resources
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:resourceRequirements
+        - path: racks[0].name
+          description: |
+            User friendly name of the rack. Limit characters to 
+            alphanumeric values, dashes, and underscores.
+          displayName: Name
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:rack
+        
+        - path: racks[0].zone
+          description: |
+            failure-domain.beta.kubernetes.io/zone node label value
+            where pods related to this rack will be restricted. Note
+            the value may be in the topology.kubernetes.io/zone label
+            as well.
+          displayName: Zone
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:rack
+        
+        - path: resources
+          description: |
+            Resource requests and limits for each Cassandra pod in the 
+            cluster. Note: Only specify CPU and memory limits here.
+          displayName: Resources
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:resourceRequirements
 
-          - path: storageConfig
-            description: |
-              Storage descriptors used during the provisioning and consumption
-              of Persistent Volumes.
-            displayName: Storage Config
+        - path: storageConfig
+          description: |
+            Storage descriptors used during the provisioning and consumption
+            of Persistent Volumes.
+          displayName: Storage Config
 
-          - path: storageConfig.cassandraDataVolumeClaimSpec.storageClassName
-            description: |
-              Name of the storage class where data will reside. This must be 
-              defined within the Kubernetes prior to provisioning a datacenter.
-            displayName: Storage Class
-            x-descriptors:
-              - urn:alm:descriptor:io.kubernetes:StorageClass
-              - urn:alm:descriptor:com.tectonic.ui:fieldGroup:storageConfig
+        - path: storageConfig.cassandraDataVolumeClaimSpec.storageClassName
+          description: |
+            Name of the storage class where data will reside. This must be 
+            defined within the Kubernetes prior to provisioning a datacenter.
+          displayName: Storage Class
+          x-descriptors:
+            - urn:alm:descriptor:io.kubernetes:StorageClass
+            - urn:alm:descriptor:com.tectonic.ui:fieldGroup:storageConfig
 
-          - path: storageConfig.cassandraDataVolumeClaimSpec.accessModes[0]
-            description: |
-              Access mode of the volume
-            displayName: Access Modes
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:select:ReadWriteOnce
-              - urn:alm:descriptor:com.tectonic.ui:fieldGroup:storageConfig
+        - path: storageConfig.cassandraDataVolumeClaimSpec.accessModes[0]
+          description: |
+            Access mode of the volume
+          displayName: Access Modes
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:select:ReadWriteOnce
+            - urn:alm:descriptor:com.tectonic.ui:fieldGroup:storageConfig
+        
+        - path: storageConfig.cassandraDataVolumeClaimSpec.resources
+          description: |
+            Storage requirements for the Cassandra data volume. Only specify
+            the Storage column here.
+          displayName: Resources
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:resourceRequirements
+            - urn:alm:descriptor:com.tectonic.ui:fieldGroup:storageConfig
+        
+        - path: superuserSecretName
+          description: |
+            Kubernetes Secret containing a username and password for
+            the initial super user accout. Omitting this field will
+            result in a secret being created automatically with 
+            random values for each.
+          displayName: Superuser Secret Name
+          x-descriptors:
+            - urn:alm:descriptor:io.kubernetes:Secret
+        
+        - path: nodeSelector
+          description: |
+            Selector for identifying which nodes the DC pods should be deployed on.
+          displayName: Node Selector
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+        
+        - path: allowMultipleNodesPerWorker
+          description: |
+            Allows multiple Cassandra pods per Kubernetes worker. 
+            Ensure appropriate limits and requests are set in the
+            resource field to limit the number of pods per worker.
+          displayName: Allow Multiple Nodes Per Worker
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+
+        - path: stopped
+          description: |
+            When enabled, stops all pods making up the cluster. Storage
+            is retained, but all compute instances are stopped.
+          displayName: Stopped
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+        
+        - path: rollingRestartRequested
+          description: |
+            Request a restart of all nodes in the cluster in a rolling 
+            fashion to prevent service interuptions. After the restart
+            is complete this field is set back to false.
+          displayName: Rolling Restart Requested
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+
+        - path: canaryUpgrade
+          description: |
+            Informs the operator to apply the requested changes to
+            a single rack. After manual validation set this value 
+            back to false and the operator will continue deployment.
+          displayName: Canary Upgrade
+          x-descriptors:
+            - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+
+        - path: serverImage
+          description: |
+            Optional: Specify the name of the image to use for each
+            node in the cluster.
+          displayName: Server Image
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:advanced
+
+        - path: configBuilderImage
+          description: |
+            Optional: Specify the name of the image to use when 
+            rendering configuration files as each node in the 
+            cluster is initialized.
+          displayName: Config Builder Image
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:advanced
+
+        - path: replaceNodes[0]
+          description: |
+            A list of pod names that need to be replaced
+          displayName: Replace Nodes
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:replaceNodes
+            - urn:alm:descriptor:com.tectonic.ui:advanced
           
-          - path: storageConfig.cassandraDataVolumeClaimSpec.resources
-            description: |
-              Storage requirements for the Cassandra data volume. Only specify
-              the Storage column here.
-            displayName: Resources
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:resourceRequirements
-              - urn:alm:descriptor:com.tectonic.ui:fieldGroup:storageConfig
-          
-          - path: superuserSecretName
-            description: |
-              Kubernetes Secret containing a username and password for
-              the initial super user accout. Omitting this field will
-              result in a secret being created automatically with 
-              random values for each.
-            displayName: Superuser Secret Name
-            x-descriptors:
-              - urn:alm:descriptor:io.kubernetes:Secret
-          
-          - path: nodeSelector
-            description: |
-              Selector for identifying which nodes the DC pods should be deployed on.
-            displayName: Node Selector
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-          
-          - path: allowMultipleNodesPerWorker
-            description: |
-              Allows multiple Cassandra pods per Kubernetes worker. 
-              Ensure appropriate limits and requests are set in the
-              resource field to limit the number of pods per worker.
-            displayName: Allow Multiple Nodes Per Worker
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+        - path: forceUpgradeRacks[0]
+          description: |
+            Force upgrading of racks
+          displayName: Force Upgrade Racks
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:forceUpgradeRacks
+            - urn:alm:descriptor:com.tectonic.ui:advanced
 
-          - path: stopped
-            description: |
-              When enabled, stops all pods making up the cluster. Storage
-              is retained, but all compute instances are stopped.
-            displayName: Stopped
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+        - path: additionalSeeds[0]
+          description: |
+            Additional seeds for Cassandra
+          displayName: Additional Seeds
+          x-descriptors: 
+            - urn:alm:descriptor:com.tectonic.ui:text
+            - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:additionalSeeds
+            - urn:alm:descriptor:com.tectonic.ui:advanced
+        
+        - path: serviceAccount
+          description: Service Account
+          displayName: Service Account
+          x-descriptors:
+            - urn:alm:descriptor:io.kubernetes:ServiceAccount
+            - urn:alm:descriptor:com.tectonic.ui:advanced
+        
+        - path: config
+          description: |
+            JSON object representing configuration overrides.
+          displayName: Config
+
+        - path: managementApiAuth
+          description: |
+            Configuration for connectivity between cass-operator and Management API
+          displayName: Management API Authentication
+        
+        - path: replaceNodes
+          description: |
+            A list of pod names that need to be replaced
+          displayName: Replace Nodes
+      statusDescriptors:
+        - path: cassandraOperatorProgress
+          description: Cassandra Operator Progress
+          displayName: Cassandra Operator Progress
+          x-descriptors:
+            - urn:alm:descriptor:text
+
+        - path: lastRollingRestart
+          description: Last Rolling Restart
+          displayName: Last Rolling Restart
+          x-descriptors: 
+            - urn:alm:descriptor:text
+
+        - path: lastServerNodeStarted
+          description: Last Server Node Started
+          displayName: Last Server Node Started
+          x-descriptors: 
+            - urn:alm:descriptor:text
+
+        - path: superUserUpserted
+          description: Super User Upserted
+          displayName: Super User Upserted
+          x-descriptors: 
+            - urn:alm:descriptor:text
+        
+        - path: nodeReplacements
+          description: |
+            List of all nodes that have been replaced.
+          displayName: Node Replacements
           
-          - path: rollingRestartRequested
-            description: |
-              Request a restart of all nodes in the cluster in a rolling 
-              fashion to prevent service interuptions. After the restart
-              is complete this field is set back to false.
-            displayName: Rolling Restart Requested
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
-
-          - path: canaryUpgrade
-            description: |
-              Informs the operator to apply the requested changes to
-              a single rack. After manual validation set this value 
-              back to false and the operator will continue deployment.
-            displayName: Canary Upgrade
-            x-descriptors:
-              - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
-
-          - path: serverImage
-            description: |
-              Optional: Specify the name of the image to use for each
-              node in the cluster.
-            displayName: Server Image
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:advanced
-
-          - path: configBuilderImage
-            description: |
-              Optional: Specify the name of the image to use when 
-              rendering configuration files as each node in the 
-              cluster is initialized.
-            displayName: Config Builder Image
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:advanced
-
-          - path: replaceNodes[0]
-            description: |
-              A list of pod names that need to be replaced
-            displayName: Replace Nodes
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:replaceNodes
-              - urn:alm:descriptor:com.tectonic.ui:advanced
-            
-          - path: forceUpgradeRacks[0]
-            description: |
-              Force upgrading of racks
-            displayName: Force Upgrade Racks
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:forceUpgradeRacks
-              - urn:alm:descriptor:com.tectonic.ui:advanced
-
-          - path: additionalSeeds[0]
-            description: |
-              Additional seeds for Cassandra
-            displayName: Additional Seeds
-            x-descriptors: 
-              - urn:alm:descriptor:com.tectonic.ui:text
-              - urn:alm:descriptor:com.tectonic.ui:arrayFieldGroup:additionalSeeds
-              - urn:alm:descriptor:com.tectonic.ui:advanced
-          
-          - path: serviceAccount
-            description: Service Account
-            displayName: Service Account
-            x-descriptors:
-              - urn:alm:descriptor:io.kubernetes:ServiceAccount
-              - urn:alm:descriptor:com.tectonic.ui:advanced
-          
-          - path: config
-            description: |
-              JSON object representing configuration overrides.
-            displayName: Config
-
-          - path: managementApiAuth
-            description: |
-              Configuration for connectivity between cass-operator and Management API
-            displayName: Management API Authentication
-          
-          - path: replaceNodes
-            description: |
-              A list of pod names that need to be replaced
-            displayName: Replace Nodes
-          
-        statusDescriptors:
-          - path: cassandraOperatorProgress
-            description: Cassandra Operator Progress
-            displayName: Cassandra Operator Progress
-            x-descriptors:
-              - urn:alm:descriptor:text
-
-          - path: lastRollingRestart
-            description: Last Rolling Restart
-            displayName: Last Rolling Restart
-            x-descriptors: 
-              - urn:alm:descriptor:text
-
-          - path: lastServerNodeStarted
-            description: Last Server Node Started
-            displayName: Last Server Node Started
-            x-descriptors: 
-              - urn:alm:descriptor:text
-
-          - path: superUserUpserted
-            description: Super User Upserted
-            displayName: Super User Upserted
-            x-descriptors: 
-              - urn:alm:descriptor:text
-          
-          - path: nodeReplacements
-            description: |
-              List of all nodes that have been replaced.
-            displayName: Node Replacements
-            
-          - path: nodeStatuses
-            description: |
-              Data structure containing information around the health
-              of all pods in the cluster.
-            displayName: Node Statuses
-          
-          - path: conditions
-            description: |
-              Foo
-            displayName: Conditions
+        - path: nodeStatuses
+          description: |
+            Data structure containing information around the health
+            of all pods in the cluster.
+          displayName: Node Statuses
+        
+        - path: conditions
+          description: |
+            Foo
+          displayName: Conditions
   description: |
     ## Apache Cassandra
 
